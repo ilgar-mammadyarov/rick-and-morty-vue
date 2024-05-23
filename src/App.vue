@@ -15,7 +15,7 @@ const statuses = ref<CharacterStatus[]>([
   { text: 'Unknown', value: 'unknown', selected: false },]);
 const selectedStatus = ref<CharacterStatus>(statuses.value[0])
 const currentPage = ref(1);
-const characters: CharacterResultApiDto[] = ref([]);
+const characters = ref<CharacterResultApiDto[]>([]);
 const lastPage = ref(0);
 
 
