@@ -41,6 +41,8 @@ const searchCharacters = () => {
       .then((data: CharacterApiDto) => {
         characters.value = data.results
         lastPage.value = data.info.pages
+      }).catch(() => {
+        characters.value = []
       })
   } else {
     fetch('https://rickandmortyapi.com/api/character')
@@ -48,12 +50,13 @@ const searchCharacters = () => {
       .then((data: CharacterApiDto) => {
         characters.value = data.results
         lastPage.value = data.info.pages
+      }).catch(() => {
+        characters.value = []
       })
   }
 }
 
 const changePage = (nextPage: number) => {
-  console.log({ nextPage })
   const searchValue = search.value.toLowerCase();
   currentPage.value = nextPage;
 
@@ -97,7 +100,7 @@ const changePage = (nextPage: number) => {
         </div>
       </div>
 
-      <nav>
+      <nav v-if="characters && characters.length > 0 && lastPage !== 1">
         <ul class="flex items-center -space-x-px h-10 text-base justify-center">
           <button class="group" :disabled="currentPage === 1" @click="changePage(currentPage - 1)">
             <a href="#"
